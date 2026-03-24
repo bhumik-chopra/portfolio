@@ -1,4 +1,3 @@
-// Enhanced JavaScript for Portfolio Website
 document.addEventListener('DOMContentLoaded', function() {
     // DOM Elements
     const header = document.querySelector('header');
@@ -14,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Professions for typewriter effect
     const professions = [
-        'DRONACHARYA COLLEGE OF ENGINEERINGG'
+        'Computer Science Graduate'
     ];
 
     // Typewriter Effect
@@ -40,12 +39,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         if (!isDeleting && charIndex === currentProfession.length) {
-            typingSpeed = 2000; // Pause at end
+            typingSpeed = 2000;
             isDeleting = true;
         } else if (isDeleting && charIndex === 0) {
             isDeleting = false;
             professionIndex = (professionIndex + 1) % professions.length;
-            typingSpeed = 500; // Pause before next word
+            typingSpeed = 500;
         }
 
         setTimeout(typeWriter, typingSpeed);
@@ -71,10 +70,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     top: offsetTop,
                     behavior: 'smooth'
                 });
-                // Close mobile menu
+
                 if (navMenu?.classList.contains('active')) {
                     toggleMobileMenu();
                 }
+
                 updateActiveNavLink(targetId);
             }
         }
@@ -105,6 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const sections = document.querySelectorAll('section[id]');
         const scrollPosition = window.scrollY + (header?.offsetHeight || 80);
         let activeSection = null;
+
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
             const sectionBottom = sectionTop + section.offsetHeight;
@@ -112,6 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 activeSection = section;
             }
         });
+
         if (activeSection) {
             const id = '#' + activeSection.getAttribute('id');
             updateActiveNavLink(id);
@@ -174,11 +176,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const size = Math.max(rect.width, rect.height);
         const x = event.clientX - rect.left - size / 2;
         const y = event.clientY - rect.top - size / 2;
+
         ripple.style.width = ripple.style.height = size + 'px';
         ripple.style.left = x + 'px';
         ripple.style.top = y + 'px';
         ripple.classList.add('ripple');
         button.appendChild(ripple);
+
         setTimeout(() => {
             ripple.remove();
         }, 600);
@@ -191,7 +195,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 showNotification('Contact section coming soon!', 'info');
             }
         } else if (button.textContent.includes('Download CV')) {
-            showNotification('CV download will be available soon!', 'info');
+            const link = document.createElement('a');
+            link.href = './bhumik_cv.pdf';
+            link.download = 'bhumik_cv.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
     }
 
@@ -203,6 +212,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <i class="fas fa-${type === 'info' ? 'info-circle' : 'check-circle'}"></i>
             <span>${message}</span>
         `;
+
         Object.assign(notification.style, {
             position: 'fixed',
             top: '20px',
@@ -219,10 +229,13 @@ document.addEventListener('DOMContentLoaded', function() {
             transition: 'transform 0.3s ease',
             boxShadow: '0 10px 30px rgba(0, 0, 0, 0.2)'
         });
+
         document.body.appendChild(notification);
+
         setTimeout(() => {
             notification.style.transform = 'translateX(0)';
         }, 100);
+
         setTimeout(() => {
             notification.style.transform = 'translateX(100%)';
             setTimeout(() => {
@@ -236,17 +249,20 @@ document.addEventListener('DOMContentLoaded', function() {
         if (event.key === 'Escape' && navMenu?.classList.contains('active')) {
             toggleMobileMenu();
         }
+
         if (navMenu?.classList.contains('active') && (event.key === 'ArrowDown' || event.key === 'ArrowUp')) {
             event.preventDefault();
             const currentActive = document.querySelector('.nav-link:focus') || document.querySelector('.nav-link.active');
             const navLinksArray = Array.from(navLinks);
             const currentIndex = navLinksArray.indexOf(currentActive);
             let nextIndex;
+
             if (event.key === 'ArrowDown') {
                 nextIndex = (currentIndex + 1) % navLinksArray.length;
             } else {
                 nextIndex = currentIndex <= 0 ? navLinksArray.length - 1 : currentIndex - 1;
             }
+
             navLinksArray[nextIndex]?.focus();
         }
     }
@@ -278,6 +294,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function initializeActiveNav() {
         const hash = window.location.hash || '#home';
         updateActiveNavLink(hash);
+
         if (hash !== '#home') {
             setTimeout(() => {
                 const targetElement = document.querySelector(hash);
@@ -294,6 +311,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Event Listeners
     hamburger?.addEventListener('click', toggleMobileMenu);
+
     navLinks.forEach(link => {
         link.addEventListener('click', smoothScroll);
         link.addEventListener('keydown', (e) => {
@@ -303,11 +321,13 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
     [ctaBtn, ...hireBtns, aboutBtn].forEach(btn => {
         if (btn) {
             btn.addEventListener('click', handleButtonClick);
         }
     });
+
     socialIcons.forEach(icon => {
         icon.addEventListener('mouseenter', function() {
             this.style.transform = 'translateY(-3px) scale(1.1)';
@@ -316,44 +336,52 @@ document.addEventListener('DOMContentLoaded', function() {
             this.style.transform = 'translateY(0) scale(1)';
         });
     });
+
     window.addEventListener('scroll', optimizedScrollHandler);
     window.addEventListener('resize', handleResize);
     window.addEventListener('hashchange', initializeActiveNav);
     document.addEventListener('keydown', handleKeyboard);
+
     document.addEventListener('click', (event) => {
-        if (navMenu?.classList.contains('active') && 
-            !navMenu.contains(event.target) && 
-            !hamburger?.contains(event.target)) {
+        if (
+            navMenu?.classList.contains('active') &&
+            !navMenu.contains(event.target) &&
+            !hamburger?.contains(event.target)
+        ) {
             toggleMobileMenu();
         }
     });
 
-    // ---- IMPORTANT: THE ONLY FORM HANDLER: ----
+    // Contact Form Handler
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
+
             const formData = {
                 name: this.name.value,
                 email: this.email.value,
                 subject: this.subject.value,
                 message: this.message.value
             };
+
             try {
-                const response = await fetch('http://localhost:10000/api/contact', {
+                const response = await fetch('https://portfolio-backend-ykzu.onrender.com/api/contact', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(formData)
                 });
+
                 const result = await response.json();
+
                 if (result.success) {
-                      showNotification('Thank you for your message! I will get back to you soon.', 'success');
+                    showNotification('Thank you for your message! I will get back to you soon.', 'success');
                     this.reset();
                 } else {
-                    alert('Error saving. Try again.');
+                    showNotification('Error saving. Try again.', 'info');
                 }
             } catch (err) {
-                alert('Cannot connect to server.');
+                showNotification('Cannot connect to server.', 'info');
             }
         });
     }
@@ -365,11 +393,14 @@ document.addEventListener('DOMContentLoaded', function() {
         setupAnimations();
         initializeActiveNav();
         handleScroll();
+
         setTimeout(() => {
             document.body.classList.add('loaded');
         }, 100);
+
         console.log('Portfolio website initialized successfully! 🚀');
     }
+
     init();
 
     const style = document.createElement('style');
@@ -409,4 +440,3 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
     document.head.appendChild(style);
 });
-
