@@ -33,8 +33,8 @@ document.addEventListener('DOMContentLoaded', function() {
             heroSubtitle.innerHTML = currentProfession.substring(0, charIndex) + '<span class="cursor">|</span>';
             typingSpeed = 75;
         } else {
+             charIndex++;
             heroSubtitle.innerHTML = currentProfession.substring(0, charIndex) + '<span class="cursor">|</span>';
-            charIndex++;
             typingSpeed = 150;
         }
 
