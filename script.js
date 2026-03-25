@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Professions for typewriter effect
     const professions = [
-        'Computer Science Graduate'
+        'DRONACHARYA COLLEGE OF ENGINEERING',
     ];
 
     // Typewriter Effect
