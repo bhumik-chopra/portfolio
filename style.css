@@ -169,6 +169,8 @@ canvas {
     top: 0;
     z-index: 30;
     padding: 20px 0 0;
+    transition: transform var(--transition-slow), opacity var(--transition), padding var(--transition);
+    will-change: transform, opacity;
 }
 
 .navbar {
@@ -190,6 +192,12 @@ canvas {
     background: rgba(4, 7, 13, 0.88);
     border-color: rgba(255, 216, 90, 0.24);
     box-shadow: 0 16px 48px rgba(0, 0, 0, 0.28);
+}
+
+.site-header.nav-hidden {
+    transform: translateY(calc(-100% - 12px));
+    opacity: 0;
+    pointer-events: none;
 }
 
 .nav-brand {

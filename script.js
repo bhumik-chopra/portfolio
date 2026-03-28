@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentTitleIndex = 0;
     let currentCharacter = 0;
     let deleting = false;
+    let lastScrollY = window.scrollY;
 
     function setNavState(open) {
         if (!hamburger || !navPanel) return;
@@ -186,6 +187,10 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("scroll", () => {
         const scrollY = window.scrollY;
         header?.classList.toggle("scrolled", scrollY > 30);
+        const scrollingDown = scrollY > lastScrollY;
+        const shouldHideHeader = scrollingDown && scrollY > 140 && !(navPanel?.classList.contains("active"));
+        header?.classList.toggle("nav-hidden", shouldHideHeader);
+        lastScrollY = scrollY;
 
         const offset = (header?.offsetHeight || 0) + 120;
         let activeId = "#home";
