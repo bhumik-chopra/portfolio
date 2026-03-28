@@ -4,305 +4,418 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bhumik Chopra Portfolio</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <nav class="navbar">
-            <div class="nav-brand">Bhumik Chopra<span class="brand-dot">.</span></div>
-            <ul class="nav-menu">
-                <li><a href="#home" class="nav-link active">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#skills" class="nav-link">Skills</a></li>
-                <li><a href="#service" class="nav-link">Services</a></li>
-                <li><a href="#project" class="nav-link">Projects</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-            <div class="nav-cta">
-                <a href="#contact" class="cta-btn">Let's Talk</a>
-            </div>
-            <div class="hamburger">
-                <span></span><span></span><span></span>
-            </div>
-        </nav>
-    </header>
+    <div class="site-shell">
+        <div class="space-backdrop" aria-hidden="true">
+            <canvas id="starfield"></canvas>
+            <div class="hyperspace-grid"></div>
+            <div class="planet planet-gold"></div>
+            <div class="planet planet-blue"></div>
+            <div class="nebula nebula-left"></div>
+            <div class="nebula nebula-right"></div>
+        </div>
 
-    <main>
-        <section id="home" class="section home">
-            <div class="container">
-                <div class="home-content">
-                    <div class="home-text">
-                        <div class="greeting">👋 Hello there!</div>
-                        <h1 class="hero-title">I'm <span class="accent">Bhumik Chopra</span></h1>
+        <header class="site-header">
+            <nav class="navbar">
+                <a href="#home" class="nav-brand">
+                    <span class="brand-mark">BC</span>
+                    <span class="brand-copy">
+                        <strong>Bhumik Chopra</strong>
+                        <small>Galactic Portfolio</small>
+                    </span>
+                </a>
+
+                <button class="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <div class="nav-panel" id="nav-menu">
+                    <ul class="nav-menu">
+                        <li><a href="#home" class="nav-link active">Home</a></li>
+                        <li><a href="#about" class="nav-link">About</a></li>
+                        <li><a href="#skills" class="nav-link">Skills</a></li>
+                        <li><a href="#service" class="nav-link">Services</a></li>
+                        <li><a href="#project" class="nav-link">Projects</a></li>
+                        <li><a href="#contact" class="nav-link">Contact</a></li>
+                    </ul>
+                    <a href="#contact" class="cta-btn nav-cta">Open Channel</a>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+            <section id="home" class="section hero-section">
+                <div class="container hero-grid">
+                    <div class="hero-copy" data-reveal="left">
+                        <div class="eyebrow">
+                            <span class="eyebrow-line"></span>
+                            <span>Core Systems Online</span>
+                        </div>
+                        <p class="hero-kicker">Star Wars inspired.</p>
+                        <h1 class="hero-title">
+                            I'm <span class="hero-accent">Bhumik Chopra</span>
+                        </h1>
                         <h2 class="hero-subtitle" id="rotating-profession">DRONACHARYA COLLEGE OF ENGINEERING </h2>
                         <p class="hero-desc">
                           Computer science graduate skilled in C, Python, SQL, and full-stack development, with hands-on experience in building responsive and dynamic frontend applications using React, HTML, CSS, and JavaScript.
                         </p>
+
                         <div class="hero-stats">
-                            <div class="stat">
-                                <span class="stat-number">4+</span>
+                            <article class="stat-card" data-reveal="up">
+                                <span class="stat-value">4+</span>
                                 <span class="stat-label">Projects Completed</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-number">1+</span>
+                            </article>
+                            <article class="stat-card" data-reveal="up">
+                                <span class="stat-value">1+</span>
                                 <span class="stat-label">Internship Experience</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-number">6+</span>
+                            </article>
+                            <article class="stat-card" data-reveal="up">
+                                <span class="stat-value">6+</span>
                                 <span class="stat-label">Skills & Tools</span>
-                            </div>
+                            </article>
                         </div>
-                        <div class="hero-actions">
-                            <button class="hire-btn primary">
+
+                        <div class="hero-actions" data-reveal="up">
+                            <button class="action-btn primary hire-btn">
                                 <span>Hire Me</span>
                                 <i class="fas fa-arrow-right"></i>
                             </button>
-                            <button class="hire-btn secondary">
+                            <button class="action-btn secondary hire-btn">
                                 <i class="fas fa-download"></i>
                                 <span>Download CV</span>
                             </button>
                         </div>
-                        <div class="social-links">
-                            <a href="https://wa.me/918178307875" aria-label="WhatsApp" class="social-icon whatsapp" target="_blank" rel="noopener">
+
+                        <div class="social-links" data-reveal="up">
+                            <a href="https://wa.me/918178307875" aria-label="WhatsApp" class="social-icon" target="_blank" rel="noopener">
                                 <i class="fab fa-whatsapp"></i>
                             </a>
-                            <a href="https://linkedin.com/in/bhumik-chopra" aria-label="LinkedIn" class="social-icon linkedin" target="_blank" rel="noopener">
+                            <a href="https://linkedin.com/in/bhumik-chopra" aria-label="LinkedIn" class="social-icon" target="_blank" rel="noopener">
                                 <i class="fab fa-linkedin-in"></i>
                             </a>
-                            <a href="https://github.com/bhumik-chopra" aria-label="GitHub" class="social-icon github" target="_blank" rel="noopener">
+                            <a href="https://github.com/bhumik-chopra" aria-label="GitHub" class="social-icon" target="_blank" rel="noopener">
                                 <i class="fab fa-github"></i>
                             </a>
-                            <a href="#" aria-label="Instagram" class="social-icon instagram">
-                                <i class="fab fa-instagram"></i>
+                            <a href="mailto:bhumik.26043@ggninida.dronachary.info" aria-label="Email" class="social-icon">
+                                <i class="fas fa-envelope"></i>
                             </a>
                         </div>
                     </div>
-                    <div class="home-image">
-                        <div class="image-container">
-                            <img src="images/profile.jpg" alt="Profile photo of Bhumik Chopra" class="profile-image">
-                            <div class="floating-card card-1">
-                                <i class="fas fa-code"></i>
-                                <span>Clean Code</span>
+
+                    <div class="hero-visual" data-reveal="right">
+                        <div class="hero-frame">
+                            <div class="radar-ring ring-1"></div>
+                            <div class="radar-ring ring-2"></div>
+                            <div class="radar-ring ring-3"></div>
+                            <div class="hero-portrait">
+                                <img src="images/profile.jpg" alt="Portrait of Bhumik Chopra" class="profile-image">
                             </div>
-                            <div class="floating-card card-2">
-                                <i class="fas fa-mobile-alt"></i>
-                                <span>Responsive</span>
+                            <div class="hud-card hud-card-top">
+                                <span class="hud-label">Role</span>
+                                <strong>Full-Stack Developer</strong>
                             </div>
-                            <div class="floating-card card-3">
-                                <i class="fas fa-rocket"></i>
-                                <span>Fast Loading</span>
+                            <div class="hud-card hud-card-left">
+                                <span class="hud-label">Specialty</span>
+                                <strong>Frontend Systems</strong>
+                            </div>
+                            <div class="hud-card hud-card-bottom">
+                                <span class="hud-label">Status</span>
+                                <strong>Available for Work</strong>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="about" class="section about">
-            <div class="container">
-                <div class="about-content">
-                    <div class="about-image">
-                        <div class="image-wrapper">
-                            <img src="images/profile.jpg" alt="About Bhumik Chopra" class="about-img">
-                            <div class="experience-badge">
-                                <span class="badge-number">1+</span>
-                                <span class="badge-text">Years<br>Experience</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="about-text">
+            <section id="about" class="section">
+                <div class="container">
+                    <div class="section-heading" data-reveal="up">
+                        <p class="section-tag">Origin Story</p>
                         <h2 class="section-title">About Me</h2>
-                        <div class="about-description">
-                            <p>I'm a computer science undergraduate at Dronacharya College of Engineering with hands-on experience in software development through an internship in CNH Industrial India Private Limited.</p>
-                            <p>A student with a strong foundation in C, Python, SQL, and the software development lifecycle. Experienced in data structures, algorithms, database management, and version control, with hands-on experience in building responsive and dynamic frontend applications using React, JavaScript, HTML, and CSS. Proficient in designing interactive user interfaces, managing state, and creating seamless user experiences, along with developing end-to-end solutions through practical project implementations to solve real-world problems.</p>
-                        <div class="about-highlights">
-                            <div class="highlight">
-                                <i class="fas fa-graduation-cap"></i>
-                                <div>
-                                    <h4>Education</h4>
-                                    <p>B.Tech in Computer Science & Engineering, Dronacharya College of Engineering, 2023-2027</p>
-                                </div>
-                            </div>
-                            <div class="highlight">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <div>
-                                    <h4>Location</h4>
-                                    <p>New Delhi, India</p>
-                                </div>
-                            </div>
-                            <div class="highlight">
-                                <i class="fas fa-briefcase"></i>
-                                <div>
-                                    <h4>Experience</h4>
-                                    <p>Internship at CNH Industrial India Pvt Ltd (Jun-Aug 2025)</p>
-                                </div>
+                    </div>
+
+                    <div class="about-grid">
+                        <div class="about-panel portrait-panel" data-reveal="left">
+                            <img src="images/profile.jpg" alt="Bhumik Chopra profile" class="about-img">
+                            <div class="panel-badge">
+                                <span>Experience</span>
+                                <strong>1+ Year</strong>
                             </div>
                         </div>
-                        <div class="about-actions">
-                            <a href="bhumik_cv.pdf" download>
-                                <button class="about-btn">Download CV <i class="fas fa-download"></i></button>
+
+                        <div class="about-panel about-copy" data-reveal="right">
+                            <p>
+                                I'm a computer science undergraduate at Dronacharya College of Engineering with hands-on experience in software development through an internship in CNH Industrial India Private Limited.
+                            </p>
+                            <p>
+                                A student with a strong foundation in C, Python, SQL, and the software development lifecycle. Experienced in data structures, algorithms, database management, and version control, with hands-on experience in building responsive and dynamic frontend applications using React, JavaScript, HTML, and CSS. Proficient in designing interactive user interfaces, managing state, and creating seamless user experiences, along with developing end-to-end solutions through practical project implementations to solve real-world problems.
+                            </p>
+
+                            <div class="info-list">
+                                <article class="info-card">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <div>
+                                        <h3>Education</h3>
+                                        <p>B.Tech in Computer Science & Engineering, Dronacharya College of Engineering, 2023-2027</p>
+                                    </div>
+                                </article>
+                                <article class="info-card">
+                                    <i class="fas fa-location-dot"></i>
+                                    <div>
+                                        <h3>Location</h3>
+                                        <p>New Delhi, India</p>
+                                    </div>
+                                </article>
+                                <article class="info-card">
+                                    <i class="fas fa-briefcase"></i>
+                                    <div>
+                                        <h3>Experience</h3>
+                                        <p>Internship at CNH Industrial India Pvt Ltd (Jun-Aug 2025)</p>
+                                    </div>
+                                </article>
+                            </div>
+
+                            <a href="bhumik_cv.pdf" download class="action-btn tertiary about-btn">
+                                <span>Download CV</span>
+                                <i class="fas fa-download"></i>
                             </a>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="skills" class="section skills">
-            <div class="container">
-                <h2 class="section-title">Skills & Expertise</h2>
-                <div class="skills-content">
-                    <div class="skills-grid">
-                        <div class="skill-category">
-                            <h3>Technical Skills</h3>
-                            <div class="skill-items">
-                                <div class="skill-item"><i class="fab fa-c"></i><span>C, C++, Python, SQL, R, Java, JavaScript, HTML, CSS</span></div>
-                                <div class="skill-item"><i class="fab fa-react"></i><span>React, Streamlit, Hyperledger Fabric, FastAPI</span></div>
-                                <div class="skill-item"><i class="fab fa-git-alt"></i><span>Git, GitHub, VS Code, Android Studio, Postman, DEV C, Jupyter, Swagger UI, Docker</span></div>
-                                <div class="skill-item"><i class="fas fa-database"></i><span>MongoDB, SQLite, SQL Databases</span></div>
-                                <div class="skill-item"><i class="fab fa-linux"></i><span>Windows, Linux (Ubuntu)</span></div>
-                                <div class="skill-item"><i class="fas fa-cloud"></i><span>Deployment: Vercel, Render</span></div>
+            <section id="skills" class="section">
+                <div class="container">
+                    <div class="section-heading" data-reveal="up">
+                        <p class="section-tag">Capabilities</p>
+                        <h2 class="section-title">Skills & Expertise</h2>
+                    </div>
+
+                    <div class="skill-layout">
+                        <article class="glass-panel" data-reveal="left">
+                            <h3 class="panel-title">Technical Skills</h3>
+                            <div class="skill-list">
+                                <div class="skill-row">
+                                    <span class="skill-name">Programming</span>
+                                    <span class="skill-value">C, C++, Python, SQL, R, Java, JavaScript, HTML, CSS</span>
+                                </div>
+                                <div class="skill-row">
+                                    <span class="skill-name">Frameworks</span>
+                                    <span class="skill-value">React, Streamlit, Hyperledger Fabric, FastAPI</span>
+                                </div>
+                                <div class="skill-row">
+                                    <span class="skill-name">Tooling</span>
+                                    <span class="skill-value">Git, GitHub, VS Code, Android Studio, Postman, DEV C, Jupyter, Swagger UI, Docker</span>
+                                </div>
+                                <div class="skill-row">
+                                    <span class="skill-name">Data Systems</span>
+                                    <span class="skill-value">MongoDB, SQLite, SQL Databases</span>
+                                </div>
+                                <div class="skill-row">
+                                    <span class="skill-name">Systems</span>
+                                    <span class="skill-value">Windows, Linux (Ubuntu)</span>
+                                </div>
+                                <div class="skill-row">
+                                    <span class="skill-name">Deployment</span>
+                                    <span class="skill-value">Deployment: Vercel, Render</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="skill-category">
-                            <h3>Soft Skills</h3>
-                            <div class="skill-items">
-                                <div class="skill-item"><i class="fas fa-brain"></i><span>Problem Solving, Communication, Teamwork, Adaptability</span></div>
-                                <div class="skill-item"><i class="fas fa-clock"></i><span>Time Management, Initiative, Collaboration</span></div>
-                                <div class="skill-item"><i class="fas fa-search"></i><span>Attention to Detail, Learning Agility, Reliability</span></div>
+                        </article>
+
+                        <article class="glass-panel" data-reveal="right">
+                            <h3 class="panel-title">Soft Skills</h3>
+                            <div class="trait-grid">
+                                <div class="trait-chip">Problem Solving</div>
+                                <div class="trait-chip">Communication</div>
+                                <div class="trait-chip">Teamwork</div>
+                                <div class="trait-chip">Adaptability</div>
+                                <div class="trait-chip">Time Management</div>
+                                <div class="trait-chip">Initiative</div>
+                                <div class="trait-chip">Collaboration</div>
+                                <div class="trait-chip">Attention to Detail</div>
+                                <div class="trait-chip">Learning Agility</div>
+                                <div class="trait-chip">Reliability</div>
                             </div>
-                        </div>
+
+                            <div class="system-bars">
+                                <div class="system-bar" data-level="92">
+                                    <div class="system-meta">
+                                        <span>Problem Solving</span>
+                                        <strong>92%</strong>
+                                    </div>
+                                    <div class="bar-track"><span></span></div>
+                                </div>
+                                <div class="system-bar" data-level="88">
+                                    <div class="system-meta">
+                                        <span>Communication</span>
+                                        <strong>88%</strong>
+                                    </div>
+                                    <div class="bar-track"><span></span></div>
+                                </div>
+                                <div class="system-bar" data-level="84">
+                                    <div class="system-meta">
+                                        <span>Teamwork</span>
+                                        <strong>84%</strong>
+                                    </div>
+                                    <div class="bar-track"><span></span></div>
+                                </div>
+                            </div>
+                        </article>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="service" class="section services">
-            <div class="container">
-                <h2 class="section-title">What I Do</h2>
-                <div class="services-content">
-                    <div class="services-grid">
-                        <div class="service-card">
-    <div class="service-icon"><i class="fas fa-users"></i></div>
-    <h3>Team Management</h3>
-    <p>Coordinating tasks, supporting collaboration, and ensuring smooth team workflow to achieve project goals efficiently and on time.</p>
-    <div class="service-features"><span>Leadership</span><span>Collaboration</span><span>Coordination</span></div>
-</div>
-                        <div class="service-card">
-                            <div class="service-icon"><i class="fas fa-code"></i></div>
+            <section id="service" class="section">
+                <div class="container">
+                    <div class="section-heading" data-reveal="up">
+                        <p class="section-tag">Mission Types</p>
+                        <h2 class="section-title">What I Do</h2>
+                    </div>
+
+                    <div class="card-grid services-grid">
+                        <article class="feature-card" data-reveal="up">
+                            <div class="feature-icon"><i class="fas fa-users"></i></div>
+                            <h3>Team Management</h3>
+                            <p>Coordinating tasks, supporting collaboration, and ensuring smooth team workflow to achieve project goals efficiently and on time.</p>
+                            <div class="chip-row"><span>Leadership</span><span>Collaboration</span><span>Coordination</span></div>
+                        </article>
+                        <article class="feature-card" data-reveal="up">
+                            <div class="feature-icon"><i class="fas fa-code"></i></div>
                             <h3>Software Development</h3>
                             <p>Developing efficient and scalable software solutions adhering to best practices and clean code principles.</p>
-                            <div class="service-features"><span>Clean Code</span><span>Scalability</span><span>Maintainability</span></div>
-                        </div>
-                        <div class="service-card">
-                            <div class="service-icon"><i class="fas fa-project-diagram"></i></div>
+                            <div class="chip-row"><span>Clean Code</span><span>Scalability</span><span>Maintainability</span></div>
+                        </article>
+                        <article class="feature-card" data-reveal="up">
+                            <div class="feature-icon"><i class="fas fa-diagram-project"></i></div>
                             <h3>Project Management</h3>
                             <p>Managing projects with effective collaboration, version control, and deployment pipelines.</p>
-                            <div class="service-features"><span>Agile Methodologies</span><span>Team Collaboration</span><span>Version Control</span></div>
-                        </div>
-                        <div class="service-card">
-                            <div class="service-icon"><i class="fas fa-database"></i></div>
+                            <div class="chip-row"><span>Agile Methodologies</span><span>Team Collaboration</span><span>Version Control</span></div>
+                        </article>
+                        <article class="feature-card" data-reveal="up">
+                            <div class="feature-icon"><i class="fas fa-database"></i></div>
                             <h3>Database Management</h3>
                             <p>Designing and managing robust databases optimized for performance and reliability.</p>
-                            <div class="service-features"><span>SQL & NoSQL</span><span>Data Modeling</span><span>Optimization</span></div>
-                        </div>
+                            <div class="chip-row"><span>SQL & NoSQL</span><span>Data Modeling</span><span>Optimization</span></div>
+                        </article>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="project" class="section projects">
-            <div class="container">
-                <h2 class="section-title">Projects</h2>
-                <div class="projects-content">
-                    <div class="projects-grid">
-                     <div class="project-card">
-    <div class="project-image">
-        <img src="images/image3.png" alt="Todo List Application">
-    </div>
-    <div class="project-info">
-        <h3>Todo List Application</h3>
-        <p>Developed a React-based Todo List application with routing, dynamic UI, and persistent storage, featuring an animated Vanta.js background. It allows users to add, delete, and search tasks, with all data stored in localStorage for a seamless and responsive user experience.</p>
-        <div class="project-tech"><span>React</span><span>JavaScript</span><span>React Router</span><span>Vanta.js</span><span>localStorage</span><span>CSS</span></div>
-    </div>
-</div>
-                        <div class="project-card">
-    <div class="project-image">
-        <img src="images/image2.png" alt="Khanna Khazana">
-    </div>
-    <div class="project-info">
-        <h3>Khanna Khazana</h3>
-        <p>Built a full-stack food ordering application using React, Node.js, Express, and MongoDB, featuring a customer portal for browsing dishes, managing cart, and placing orders, along with a secure admin panel for adding and deleting menu items using JWT-based authentication. Integrated Cloudinary for image uploads and deployed the frontend, admin portal, and backend on Render with environment-based configuration for a scalable and production-ready architecture.</p>
-        <div class="project-tech"><span>React</span><span>Node.js</span><span>Express</span><span>MongoDB</span><span>JWT</span><span>Cloudinary</span><span>Render</span></div>
-    </div>
-</div>
-                        <div class="project-card">
+            <section id="project" class="section">
+                <div class="container">
+                    <div class="section-heading" data-reveal="up">
+                        <p class="section-tag">Mission Archive</p>
+                        <h2 class="section-title">Projects</h2>
+                    </div>
+
+                    <div class="card-grid projects-grid">
+                        <article class="project-card" data-reveal="up">
+                            <div class="project-image">
+                                <img src="images/image3.png" alt="Todo List Application">
+                                <div class="project-glow"></div>
+                            </div>
+                            <div class="project-info">
+                                <h3>Todo List Application</h3>
+                                <p>Developed a React-based Todo List application with routing, dynamic UI, and persistent storage, featuring an animated Vanta.js background. It allows users to add, delete, and search tasks, with all data stored in localStorage for a seamless and responsive user experience.</p>
+                                <div class="chip-row"><span>React</span><span>JavaScript</span><span>React Router</span><span>Vanta.js</span><span>localStorage</span><span>CSS</span></div>
+                            </div>
+                        </article>
+                        <article class="project-card" data-reveal="up">
+                            <div class="project-image">
+                                <img src="images/image2.png" alt="Khanna Khazana">
+                                <div class="project-glow"></div>
+                            </div>
+                            <div class="project-info">
+                                <h3>Khanna Khazana</h3>
+                                <p>Built a full-stack food ordering application using React, Node.js, Express, and MongoDB, featuring a customer portal for browsing dishes, managing cart, and placing orders, along with a secure admin panel for adding and deleting menu items using JWT-based authentication. Integrated Cloudinary for image uploads and deployed the frontend, admin portal, and backend on Render with environment-based configuration for a scalable and production-ready architecture.</p>
+                                <div class="chip-row"><span>React</span><span>Node.js</span><span>Express</span><span>MongoDB</span><span>JWT</span><span>Cloudinary</span><span>Render</span></div>
+                            </div>
+                        </article>
+                        <article class="project-card" data-reveal="up">
                             <div class="project-image">
                                 <img src="images/image.png" alt="Student Management System">
+                                <div class="project-glow"></div>
                             </div>
                             <div class="project-info">
                                 <h3>Student Management System</h3>
                                 <p>Web app using Streamlit and SQLite for student records, authentication, and CRUD management.</p>
-                                <div class="project-tech"><span>Python</span><span>SQLite</span><span>Streamlit</span></div>
+                                <div class="chip-row"><span>Python</span><span>SQLite</span><span>Streamlit</span></div>
                             </div>
-                        </div>
-                        <div class="project-card">
+                        </article>
+                        <article class="project-card" data-reveal="up">
                             <div class="project-image">
                                 <img src="images/image1.png" alt="Complex Calculator">
+                                <div class="project-glow"></div>
                             </div>
                             <div class="project-info">
                                 <h3>Complex Calculator</h3>
                                 <p>Backend API in Python integrated with Swagger UI and a responsive frontend for complex calculations.</p>
-                                <div class="project-tech"><span>Python</span><span>Swagger UI</span><span>API Development</span></div>
+                                <div class="chip-row"><span>Python</span><span>Swagger UI</span><span>API Development</span></div>
                             </div>
-                        </div>
+                        </article>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="contact" class="section contact">
-            <div class="container">
-                <h2 class="section-title">Get In Touch</h2>
-                <div class="contact-content">
-                    <div class="contact-info">
-                        <div class="contact-item">
-                            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-                            <div class="contact-details">
-                                <h3>Email</h3>
-                                <p>bhumik.26043@ggninida.dronachary.info</p>
-                                <a href="mailto:bhumik.26043@ggninida.dronachary.info">Send Email</a>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <div class="contact-icon"><i class="fas fa-phone"></i></div>
-                            <div class="contact-details">
-                                <h3>Phone</h3>
-                                <p>+91 8178307875</p>
-                                <a href="tel:+918178307875">Call Now</a>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
-                            <div class="contact-details">
-                                <h3>Location</h3>
-                                <p>New Delhi, India</p>
-                                <a href="#" target="_blank">View on Map</a>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
-                            <div class="contact-details">
-                                <h3>WhatsApp</h3>
-                                <p>+91 8178307875</p>
-                                <a href="https://wa.me/918178307875" target="_blank">Send Message</a>
-                            </div>
+            <section id="contact" class="section contact-section">
+                <div class="container contact-grid">
+                    <div class="contact-copy" data-reveal="left">
+                        <p class="section-tag">Transmission Channel</p>
+                        <h2 class="section-title align-left">Get In Touch</h2>
+                        <p class="contact-lead">
+                            If you want to discuss opportunities, projects, or collaborations, feel free to reach out through any of the channels below.
+                        </p>
+
+                        <div class="info-list contact-list">
+                            <article class="info-card">
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <h3>Email</h3>
+                                    <p>bhumik.26043@ggninida.dronachary.info</p>
+                                    <a href="mailto:bhumik.26043@ggninida.dronachary.info">Send Email</a>
+                                </div>
+                            </article>
+                            <article class="info-card">
+                                <i class="fas fa-phone"></i>
+                                <div>
+                                    <h3>Phone</h3>
+                                    <p>+91 8178307875</p>
+                                    <a href="tel:+918178307875">Call Now</a>
+                                </div>
+                            </article>
+                            <article class="info-card">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <h3>Location</h3>
+                                    <p>New Delhi, India</p>
+                                    <a href="#" target="_blank">View on Map</a>
+                                </div>
+                            </article>
+                            <article class="info-card">
+                                <i class="fab fa-whatsapp"></i>
+                                <div>
+                                    <h3>WhatsApp</h3>
+                                    <p>+91 8178307875</p>
+                                    <a href="https://wa.me/918178307875" target="_blank" rel="noopener">Send Message</a>
+                                </div>
+                            </article>
                         </div>
                     </div>
-                    <div class="contact-form">
-                        <form id="contactForm">
+
+                    <div class="contact-panel glass-panel" data-reveal="right">
+                        <div class="panel-header">
+                            <span class="panel-dot"></span>
+                            <span>Secure Holo-Message</span>
+                        </div>
+                        <form id="contactForm" class="contact-form">
                             <div class="form-group">
                                 <input type="text" id="name" name="name" required>
                                 <label for="name">Your Name</label>
@@ -319,16 +432,17 @@
                                 <textarea id="message" name="message" rows="5" required></textarea>
                                 <label for="message">Your Message</label>
                             </div>
-                            <button type="submit" class="submit-btn">
+                            <button type="submit" class="action-btn primary submit-btn">
                                 <span>Send Message</span>
                                 <i class="fas fa-paper-plane"></i>
                             </button>
                         </form>
                     </div>
                 </div>
-            </div>
-        </section>
-    </main>
+            </section>
+        </main>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
