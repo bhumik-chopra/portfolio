@@ -216,6 +216,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (contactForm) {
         contactForm.addEventListener("submit", async (event) => {
             event.preventDefault();
+            const submitButton = contactForm.querySelector(".submit-btn");
+            const submitLabel = submitButton?.querySelector(".submit-label");
+            const submitIcon = submitButton?.querySelector(".submit-icon");
 
             const formData = {
                 name: contactForm.name.value,
@@ -225,6 +228,17 @@ document.addEventListener("DOMContentLoaded", () => {
             };
 
             try {
+                if (submitButton) {
+                    submitButton.disabled = true;
+                    submitButton.classList.add("is-sending");
+                }
+                if (submitLabel) {
+                    submitLabel.textContent = "Sending Message";
+                }
+                if (submitIcon) {
+                    submitIcon.className = "fas fa-satellite-dish submit-icon";
+                }
+
                 const response = await fetch("https://portfolio-backend-ykzu.onrender.com/api/contact", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -240,6 +254,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             } catch (error) {
                 showNotification("Unable to reach the contact server right now.");
+            } finally {
+                if (submitButton) {
+                    submitButton.disabled = false;
+                    submitButton.classList.remove("is-sending");
+                }
+                if (submitLabel) {
+                    submitLabel.textContent = "Send Message";
+                }
+                if (submitIcon) {
+                    submitIcon.className = "fas fa-paper-plane submit-icon";
+                }
             }
         });
     }
