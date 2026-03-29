@@ -275,10 +275,87 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!context) return;
 
         const stars = [];
+        const ships = [];
+        const lasers = [];
         const starCount = prefersReducedMotion ? 80 : 180;
+        const shipCount = prefersReducedMotion ? 0 : 4;
         let width = 0;
         let height = 0;
         let animationId = null;
+
+        function createShip(index) {
+            const fromLeft = index % 2 === 0;
+            return {
+                x: fromLeft ? -140 - Math.random() * 220 : width + 140 + Math.random() * 220,
+                y: height * (0.16 + Math.random() * 0.42),
+                vx: fromLeft ? 1.9 + Math.random() * 1.2 : -(1.9 + Math.random() * 1.2),
+                vy: (Math.random() - 0.5) * 0.2,
+                size: 16 + Math.random() * 9,
+                tilt: fromLeft ? 1 : -1,
+                hue: fromLeft ? "rgba(114, 230, 255, 0.95)" : "rgba(255, 216, 90, 0.95)",
+                fireCooldown: 20 + Math.random() * 70
+            };
+        }
+
+        function resetShip(ship, index) {
+            Object.assign(ship, createShip(index));
+        }
+
+        function drawShip(ship) {
+            context.save();
+            context.translate(ship.x, ship.y);
+            context.rotate(ship.vx > 0 ? 0.18 : -0.18);
+            context.scale(ship.tilt, 1);
+            context.fillStyle = "rgba(220, 235, 255, 0.9)";
+            context.strokeStyle = ship.hue;
+            context.lineWidth = 1.1;
+            context.shadowBlur = 14;
+            context.shadowColor = ship.hue;
+
+            context.beginPath();
+            context.moveTo(ship.size, 0);
+            context.lineTo(-ship.size * 0.7, ship.size * 0.34);
+            context.lineTo(-ship.size * 0.22, 0);
+            context.lineTo(-ship.size * 0.7, -ship.size * 0.34);
+            context.closePath();
+            context.fill();
+            context.stroke();
+
+            context.beginPath();
+            context.moveTo(-ship.size * 0.16, 0);
+            context.lineTo(-ship.size * 0.96, ship.size * 0.82);
+            context.lineTo(-ship.size * 0.62, ship.size * 0.14);
+            context.moveTo(-ship.size * 0.16, 0);
+            context.lineTo(-ship.size * 0.96, -ship.size * 0.82);
+            context.lineTo(-ship.size * 0.62, -ship.size * 0.14);
+            context.stroke();
+
+            context.restore();
+        }
+
+        function spawnLaser(ship) {
+            lasers.push({
+                x: ship.x + ship.vx * 8,
+                y: ship.y,
+                vx: ship.vx > 0 ? 8.5 : -8.5,
+                vy: ship.vy * 0.35,
+                life: 42,
+                color: ship.hue
+            });
+        }
+
+        function drawLaser(laser) {
+            context.save();
+            context.strokeStyle = laser.color;
+            context.lineWidth = 2;
+            context.shadowBlur = 12;
+            context.shadowColor = laser.color;
+            context.beginPath();
+            context.moveTo(laser.x, laser.y);
+            context.lineTo(laser.x - laser.vx * 1.7, laser.y - laser.vy * 1.7);
+            context.stroke();
+            context.restore();
+        }
 
         function resize() {
             width = window.innerWidth;
@@ -290,6 +367,8 @@ document.addEventListener("DOMContentLoaded", () => {
             starCanvas.style.height = `${height}px`;
             context.setTransform(ratio, 0, 0, ratio, 0, 0);
             stars.length = 0;
+            ships.length = 0;
+            lasers.length = 0;
 
             for (let i = 0; i < starCount; i += 1) {
                 stars.push({
@@ -298,8 +377,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     z: Math.random() * 1.2 + 0.2,
                     radius: Math.random() * 1.8 + 0.2,
                     alpha: Math.random() * 0.6 + 0.25,
-                    speed: Math.random() * 0.22 + 0.04
+                    speed: Math.random() * 0.34 + 0.1
                 });
+            }
+
+            for (let i = 0; i < shipCount; i += 1) {
+                ships.push(createShip(i));
             }
         }
 
@@ -322,6 +405,46 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 }
             });
+
+            ships.forEach((ship, index) => {
+                drawShip(ship);
+
+                if (!prefersReducedMotion) {
+                    ship.x += ship.vx;
+                    ship.y += ship.vy + Math.sin((ship.x + index * 45) * 0.01) * 0.35;
+                    ship.fireCooldown -= 1;
+
+                    if (ship.fireCooldown <= 0) {
+                        spawnLaser(ship);
+                        ship.fireCooldown = 18 + Math.random() * 55;
+                    }
+
+                    if (ship.x < -220 || ship.x > width + 220 || ship.y < -80 || ship.y > height + 80) {
+                        resetShip(ship, index);
+                    }
+                }
+            });
+
+            for (let i = lasers.length - 1; i >= 0; i -= 1) {
+                const laser = lasers[i];
+                drawLaser(laser);
+
+                if (!prefersReducedMotion) {
+                    laser.x += laser.vx;
+                    laser.y += laser.vy;
+                    laser.life -= 1;
+                }
+
+                if (
+                    laser.life <= 0 ||
+                    laser.x < -120 ||
+                    laser.x > width + 120 ||
+                    laser.y < -120 ||
+                    laser.y > height + 120
+                ) {
+                    lasers.splice(i, 1);
+                }
+            }
 
             context.shadowBlur = 0;
             animationId = requestAnimationFrame(draw);
