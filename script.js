@@ -277,8 +277,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const stars = [];
         const ships = [];
         const lasers = [];
+        const explosions = [];
         const starCount = prefersReducedMotion ? 80 : 180;
-        const shipCount = prefersReducedMotion ? 0 : 4;
+        const shipCount = prefersReducedMotion ? 0 : 6;
         let width = 0;
         let height = 0;
         let animationId = null;
@@ -357,6 +358,72 @@ document.addEventListener("DOMContentLoaded", () => {
             context.restore();
         }
 
+        function spawnExplosion(x, y, color) {
+            explosions.push({
+                x,
+                y,
+                color,
+                life: 24,
+                maxLife: 24,
+                radius: 10 + Math.random() * 10,
+                sparks: Array.from({ length: 9 + Math.floor(Math.random() * 5) }, () => {
+                    const angle = Math.random() * Math.PI * 2;
+                    const speed = 1.4 + Math.random() * 2.6;
+                    return {
+                        x,
+                        y,
+                        vx: Math.cos(angle) * speed,
+                        vy: Math.sin(angle) * speed,
+                        size: 1.8 + Math.random() * 2.8
+                    };
+                })
+            });
+        }
+
+        function drawExplosion(explosion) {
+            const alpha = explosion.life / explosion.maxLife;
+            context.save();
+
+            const outerGlow = context.createRadialGradient(
+                explosion.x,
+                explosion.y,
+                0,
+                explosion.x,
+                explosion.y,
+                explosion.radius * 2.8
+            );
+            outerGlow.addColorStop(0, `rgba(255, 245, 210, ${Math.min(0.95, alpha + 0.2)})`);
+            outerGlow.addColorStop(0.2, `rgba(255, 176, 66, ${Math.max(0.55, alpha)})`);
+            outerGlow.addColorStop(0.55, `rgba(255, 82, 24, ${Math.max(0.28, alpha * 0.8)})`);
+            outerGlow.addColorStop(1, "rgba(255, 32, 0, 0)");
+
+            context.fillStyle = outerGlow;
+            context.beginPath();
+            context.arc(explosion.x, explosion.y, explosion.radius * 2.8, 0, Math.PI * 2);
+            context.fill();
+
+            context.shadowBlur = 26;
+            context.shadowColor = "rgba(255, 120, 40, 0.9)";
+            context.fillStyle = `rgba(255, 236, 160, ${Math.max(alpha, 0.2)})`;
+            context.beginPath();
+            context.arc(explosion.x, explosion.y, explosion.radius * (0.55 + (1 - alpha) * 0.65), 0, Math.PI * 2);
+            context.fill();
+
+            context.fillStyle = `rgba(255, 92, 18, ${Math.max(alpha * 0.95, 0.18)})`;
+            context.beginPath();
+            context.arc(explosion.x, explosion.y, explosion.radius * (1.05 + (1 - alpha) * 0.9), 0, Math.PI * 2);
+            context.fill();
+
+            explosion.sparks.forEach((spark) => {
+                context.fillStyle = `rgba(255, 208, 118, ${Math.max(alpha * 0.9, 0.18)})`;
+                context.beginPath();
+                context.arc(spark.x, spark.y, spark.size, 0, Math.PI * 2);
+                context.fill();
+            });
+
+            context.restore();
+        }
+
         function resize() {
             width = window.innerWidth;
             height = window.innerHeight;
@@ -369,6 +436,7 @@ document.addEventListener("DOMContentLoaded", () => {
             stars.length = 0;
             ships.length = 0;
             lasers.length = 0;
+            explosions.length = 0;
 
             for (let i = 0; i < starCount; i += 1) {
                 stars.push({
@@ -433,6 +501,19 @@ document.addEventListener("DOMContentLoaded", () => {
                     laser.x += laser.vx;
                     laser.y += laser.vy;
                     laser.life -= 1;
+
+                    const hitShip = ships.find((ship) => (
+                        Math.sign(ship.vx) !== Math.sign(laser.vx) &&
+                        Math.hypot(ship.x - laser.x, ship.y - laser.y) < ship.size * 0.95
+                    ));
+
+                    if (hitShip) {
+                        spawnExplosion(laser.x, laser.y, laser.color);
+                        spawnExplosion(hitShip.x, hitShip.y, hitShip.hue);
+                        resetShip(hitShip, ships.indexOf(hitShip));
+                        lasers.splice(i, 1);
+                        continue;
+                    }
                 }
 
                 if (
@@ -443,6 +524,24 @@ document.addEventListener("DOMContentLoaded", () => {
                     laser.y > height + 120
                 ) {
                     lasers.splice(i, 1);
+                }
+            }
+
+            for (let i = explosions.length - 1; i >= 0; i -= 1) {
+                const explosion = explosions[i];
+                drawExplosion(explosion);
+                explosion.life -= 1;
+                explosion.radius += 0.75;
+                explosion.sparks.forEach((spark) => {
+                    spark.x += spark.vx;
+                    spark.y += spark.vy;
+                    spark.vx *= 0.98;
+                    spark.vy *= 0.98;
+                    spark.size *= 0.96;
+                });
+
+                if (explosion.life <= 0) {
+                    explosions.splice(i, 1);
                 }
             }
 
