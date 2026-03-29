@@ -493,6 +493,27 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
 
+            for (let i = 0; i < ships.length; i += 1) {
+                const shipA = ships[i];
+                for (let j = i + 1; j < ships.length; j += 1) {
+                    const shipB = ships[j];
+                    if (Math.sign(shipA.vx) === Math.sign(shipB.vx)) continue;
+
+                    const collisionDistance = (shipA.size + shipB.size) * 0.6;
+                    const collided = Math.hypot(shipA.x - shipB.x, shipA.y - shipB.y) < collisionDistance;
+
+                    if (collided) {
+                        const blastX = (shipA.x + shipB.x) / 2;
+                        const blastY = (shipA.y + shipB.y) / 2;
+                        spawnExplosion(blastX, blastY, "rgba(255, 126, 36, 0.95)");
+                        spawnExplosion(shipA.x, shipA.y, shipA.hue);
+                        spawnExplosion(shipB.x, shipB.y, shipB.hue);
+                        resetShip(shipA, i);
+                        resetShip(shipB, j);
+                    }
+                }
+            }
+
             for (let i = lasers.length - 1; i >= 0; i -= 1) {
                 const laser = lasers[i];
                 drawLaser(laser);
