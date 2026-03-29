@@ -697,6 +697,14 @@ canvas {
     align-items: center;
 }
 
+.about-grid {
+    align-items: stretch;
+}
+
+.about-grid .about-panel {
+    height: 100%;
+}
+
 .portrait-panel {
     min-height: 620px;
     padding: 18px;
@@ -726,6 +734,21 @@ canvas {
     color: var(--gold);
     margin-top: 6px;
     display: block;
+}
+
+.portrait-panel .hud-card-top {
+    top: 22px;
+    right: 18px;
+}
+
+.portrait-panel .hud-card-left {
+    left: 18px;
+    bottom: 148px;
+}
+
+.portrait-panel .hud-card-bottom {
+    right: 18px;
+    bottom: 96px;
 }
 
 .about-copy,

@@ -100,9 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function revealOnScroll(entries) {
         entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
-            entry.target.classList.add("revealed");
-            revealObserver.unobserve(entry.target);
+            entry.target.classList.toggle("revealed", entry.isIntersecting);
         });
     }
 
