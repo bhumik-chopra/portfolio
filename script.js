@@ -7,15 +7,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const contactForm = document.getElementById("contactForm");
     const systemBars = document.querySelectorAll(".system-bar");
     const revealElements = document.querySelectorAll("[data-reveal]");
-    const buttons = document.querySelectorAll(".nav-cta");
+    const buttons = document.querySelectorAll(".hire-btn, .about-btn, .nav-cta");
     const starCanvas = document.getElementById("starfield");
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const titles = [
-        "Full-Stack Developer",
-        "React & TypeScript Builder",
-        "Python Backend Developer",
-        "AI/ML Product Explorer"
+        "DRONACHARYA COLLEGE OF ENGINEERING "
     ];
 
     let currentTitleIndex = 0;
@@ -48,11 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
     function typeTitles() {
         if (!heroSubtitle) return;
 
-        if (prefersReducedMotion) {
-            heroSubtitle.textContent = titles[0];
-            return;
-        }
-
         const fullText = titles[currentTitleIndex];
         const nextText = deleting
             ? fullText.slice(0, currentCharacter--)
@@ -71,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
             timeout = 300;
         }
 
-        window.setTimeout(typeTitles, timeout);
+        window.setTimeout(typeTitles, prefersReducedMotion ? 1200 : timeout);
     }
 
     function showNotification(message, type = "info") {
@@ -172,6 +164,16 @@ document.addEventListener("DOMContentLoaded", () => {
     buttons.forEach((button) => {
         button.addEventListener("click", (event) => {
             const text = button.textContent?.trim() || "";
+            if (text.includes("Download") || text.includes("Resume")) {
+                const link = document.createElement("a");
+                link.href = "./bhumik_cv.pdf";
+                link.download = "bhumik_cv.pdf";
+                document.body.appendChild(link);
+                link.click();
+                link.remove();
+                return;
+            }
+
             if (button.classList.contains("nav-cta") || text.includes("Mission")) {
                 event.preventDefault();
                 updateActiveNav("#contact");
